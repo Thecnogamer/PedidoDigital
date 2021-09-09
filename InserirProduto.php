@@ -23,7 +23,7 @@
             $d=$_POST["descricao"];
             $a=$_POST["adendum"];
 
-            include_once ("conn.php");
+            include "conn.php";
 
             $sql="insert into produto(nome, preco, tipo, desc, add) values('$n','$p','$t','$d','$a')";
 
