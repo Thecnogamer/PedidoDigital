@@ -5,7 +5,7 @@
     <title>Pedido Digital - Inserir Produto</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
    </head>
    <body>
@@ -17,7 +17,7 @@
     <div class="container">
         <br>
         <h2>Inserir Produto</h2>
-        <form name="insProduto" action="InserirProduto.php" method="POST">
+        <form name="insProduto" action="InserirProduto.php" method="POST" enctype="multipart/form-data">
             <div class="row g-4">
                 <div class="col-sm-7">
                     <div class="mb-3">
@@ -25,7 +25,7 @@
                         <img id="output" height="180px"/>
                         <label id="labelfile" for="formFile" class="form-label" >Insira uma foto do produto</label>
                         </center>
-                        <input class="form-control" type="file" id="formFile" accept="image/*" required onchange="loadFile(event)">
+                        <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" required onchange="loadFile(event)">
                         <script>
                           var loadFile = function(event) {
                             var output = document.getElementById('output');
