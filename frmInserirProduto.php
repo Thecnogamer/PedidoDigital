@@ -3,28 +3,54 @@
    <head>
     <meta charset="UTF-8">
     <title>Pedido Digital - Inserir Produto</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-   </head>
-   <body>
-    <?php
+    </head>
+    <body>
+        <?php
     
-     include "navbar.php";
+        include "navbar.php";
     
-    ?>
-    <div class="container">
-        <br>
+        ?>
+        <div class='modal fade' id='ModalYes' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-body'>
+                        Produto inserido com sucesso
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Inserir outro</button>
+                        <button type='button' class='btn btn-primary' href="index.php">Voltar para Início</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='modal fade' id='Modaleita' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-body'>
+                        Algo deu errado
+                    </div>
+                    <div class='modal-footer'>
+                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tentar novamente</button>
+                        <button type='button' class='btn btn-primary' href="index.php">Voltar para Início</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
         <h2>Inserir Produto</h2>
-        <form name="insProduto" action="InserirProduto.php" method="POST" enctype="multipart/form-data">
+        <form name="insProduto" action="" method="POST" enctype="multipart/form-data">
             <div class="row g-4">
                 <div class="col-sm-7">
                     <div class="mb-3">
                         <center>
-                        <img id="output" height="180px"/>
+                        <img id="output" height="300px"/>
                         <label id="labelfile" for="formFile" class="form-label" >Insira uma foto do produto</label>
                         </center>
+                        <br>
                         <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" required onchange="loadFile(event)">
                         <script>
                           var loadFile = function(event) {
@@ -58,6 +84,11 @@
                         <input class="form-check-input" type="radio" name="tipo" required="required" value=2> Porção<br>
                         <input class="form-check-input" type="radio" name="tipo" required="required" value=4> Sobremesa
                     </div>
+                    <br>
+                    <div class="btn-group" role="group" aria-label="Btn limpar inserir">
+                        <input class="btn btn-success" type="submit" name="inserir" value="Inserir" >
+                        <input class="btn btn-danger" type="reset" name="limpar" value="Limpar">
+                    </div>
                     
                 </div>
             </div>
@@ -71,15 +102,49 @@
                     <textarea class="form-control form-control-sm" name="adendum" placeholder="Queijo extra, Cebola caramelizada etc"></textarea>
                 </div>
                 <div class="col">
-                    <br>
-                    <div class="btn-group" role="group" aria-label="Btn limpar inserir">
-                        <input class="btn btn-success" type="submit" name="inserir" value="Inserir" >
-                        <input class="btn btn-danger" type="reset" name="limpar" value="Limpar">
-                    </div>
+                    
                 </div>
             </div>
         </form>
-    </div>
+        </div>
 
-   </body>
+        <?php
+        if(isset($_POST["inserir"])){
+            $n=$_POST["nome"];
+            $p=$_POST["preco"];
+            $t=$_POST["tipo"];
+            $d=$_POST["descricao"];
+            $a=$_POST["adendum"];
+            $f=$_FILES["foto"]["name"];
+
+            if ($f != "") {
+                $pastaarquivos = "imagens/produtos/";
+                $nomearquivo= $f;
+                $nometemp = $_FILES["foto"]["tmp_name"];
+                move_uploaded_file($nometemp, $pastaarquivos.$nomearquivo);
+            }
+
+            include "conn.php";
+
+            $sql="insert into produto(nome, preco, tipo, descricao, adendum, foto) values('$n','$p','$t','$d','$a','$f')";
+
+            $result=mysqli_query($conn, $sql);
+
+            if($result == true){
+                echo "<script type='text/javascript'>
+              $(document).ready(function(){
+              $('#ModalYes').modal('show');
+              });
+              </script>";
+            }
+            else{
+                echo "<script type='text/javascript'>
+              $(document).ready(function(){
+              $('#Modaleita').modal('show');
+              });
+              </script>";
+            }
+        }
+        ?>
+    </body>
 </html>

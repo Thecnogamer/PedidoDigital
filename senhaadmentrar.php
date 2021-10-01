@@ -2,5 +2,6 @@
 session_destroy();
 session_start();
 $_SESSION["adm"]="ativar";
-header("Location:index.php");
+header("Location: ".$_SERVER['HTTP_REFERER']);
 ?>
+

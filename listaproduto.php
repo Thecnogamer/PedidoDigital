@@ -20,13 +20,12 @@
 
             include "conn.php";
 
-            $sql="select id,nome,preco,foto from produto";
+            $sql="select nome,preco,foto from produto";
 
             $resul=mysqli_query($conn,$sql);
 
             while($dados=mysqli_fetch_assoc($resul)){
 
-                $id = $dados["id"];
                 $n = $dados["nome"];
                 $p = $dados["preco"];
                 $i = $dados["foto"];
@@ -34,13 +33,11 @@
 
                 echo "
                 <div class='col'>
-                    <div class='card' style='width: 18rem;' onclick>
+                    <div class='card' style='width: 18rem;'>
                         <img src='$pastaArquivos$i' class='card-img-top' alt='$n'>
                         <div class='card-body'>
                             <h5 class='card-title'>$n</h5>
                             <p class='card-text'>R$: $p</p>
-                            <a class='btn btn-info' href='alterarproduto.php?id=$id'> Editar </a>
-                            <a class='btn btn-danger' href='excluirproduto.php?id=$id'> Excluir </a>
                         </div>
                     </div>
                 </div>
