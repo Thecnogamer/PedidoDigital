@@ -10,6 +10,8 @@
    <?php include "navbar.php"; ?>
 
         <div class="container">
+            <br>
+            <br>
             <div class="row row-cols-3">
     
     
@@ -35,7 +37,7 @@
                 echo "
                 <div class='col'>
                     <div class='card' style='width: 18rem;' onclick>
-                        <img src='$pastaArquivos$i' class='card-img-top' alt='$n'>
+                        <img src='$pastaArquivos$i' class='card-img-top' alt='$n' style='height: 150px; object-fit: cover'>
                         <div class='card-body'>
                             <h5 class='card-title'>$n</h5>
                             <p class='card-text'>R$: $p</p>

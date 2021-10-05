@@ -48,7 +48,7 @@
                     <div class="mb-3">
                         <center>
                         <img id="output" height="300px"/>
-                        <label id="labelfile" for="formFile" class="form-label" >Insira uma foto do produto</label>
+                        <label id="labelfile" for="formFile" class="form-label" >Insira uma foto do produto<br> Preferívelmente 16:9</label>
                         </center>
                         <br>
                         <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" required onchange="loadFile(event)">
