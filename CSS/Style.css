@@ -1,4 +1,5 @@
 @charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab:wght@500&display=swap');
 
 .upper{
     background-color: #ffbb62;
@@ -6,4 +7,12 @@
 }
 .bg-nav{
     background-color: #dbd400;
+}
+
+*{
+    font-family: 'Roboto', serif;
+}
+
+.titulo{
+    font-family: 'Roboto Slab', 'sans-serif';
 }
