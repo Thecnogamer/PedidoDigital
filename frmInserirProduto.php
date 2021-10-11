@@ -40,7 +40,7 @@
         </div>
 
 
-        <div class="container">
+        <div class="container-fluid">
         <h2>Inserir Produto</h2>
         <form name="insProduto" action="" method="POST" enctype="multipart/form-data">
             <div class="row g-4">

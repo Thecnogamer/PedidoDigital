@@ -11,7 +11,7 @@
 
   <?php include "navbar.php"; ?>
 
-  <div class="container">
+  <div class="container-fluid">
     <br>
     <br>
     <div class="row row-cols-3">
