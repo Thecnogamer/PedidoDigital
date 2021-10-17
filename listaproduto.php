@@ -47,10 +47,10 @@
                         <div class='card-body'>
                             <h5 id='nomequery' class='card-title titulo'>$n</h5>
                             <p id='precoquery' class='card-text'>R$: $p</p>
-                            <p id='idquery' style='display:none;'>$id</p>
-                            <p id='descquery' style='display:none;'>$d</p>
-                            <p id='addquery' style='display:none;'>$a</p>
-                            <p id='tipoquery' style='display:none;'>$t</p>
+                            <p id='idquery' hidden >$id</p>
+                            <p id='descquery' hidden >$d</p>
+                            <p id='addquery' hidden >$a</p>
+                            <p id='tipoquery' hidden >$t</p>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                   <p class="titulo" id="querytipo"></p>
                   <h6 class="titulo">Ingredientes:</h6>
                   <p id="querydesc"></p>
-                  <h6 class="titulo">Personalização:</h6>
+                  <h6 class="titulo" id="querypers" hidden>Personalização:</h6>
                   <p id="queryadd"></p>
                 </div>
               </div>
@@ -107,6 +107,12 @@
           document.querySelector("#querypreco").innerText = preco;
           document.querySelector("#querydesc").innerText = desc;
           document.querySelector("#queryadd").innerText = adendum;
+          
+          var pers = document.getElementById("#querypers")
+
+          if (adendum != "") {
+            pers.hidden = false;
+          }
 
           switch (tipo) {
 

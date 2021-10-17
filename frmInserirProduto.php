@@ -19,7 +19,7 @@
                     </div>
                     <div class='modal-footer'>
                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Inserir outro</button>
-                        <button type='button' class='btn btn-primary' href="index.php">Voltar para Início</button>
+                        <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
                     </div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     </div>
                     <div class='modal-footer'>
                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tentar novamente</button>
-                        <button type='button' class='btn btn-primary' href="index.php">Voltar para Início</button>
+                        <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@
 
             include "conn.php";
 
-            $sql="insert into produto(nome, preco, tipo, descricao, adendum, foto) values('$n','$p','$t','$d','$a','$f')";
+            $sql="insert into produto (nome, preco, tipo, descricao, adendum, foto) values('$n',$p,$t,'$d','$a','$f')";
 
             $result=mysqli_query($conn, $sql);
 
