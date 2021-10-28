@@ -36,11 +36,14 @@
 
                 echo "
                 <div class='col'>
-                    <div class='card' style='width: 18rem;' onclick>
+                    <div class='card' onclick='modalquery(this)' style='width: 18rem; cursor:pointer;' data-bs-toggle='modal' data-bs-target='#query'>
                         <img src='$pastaArquivos$i' class='card-img-top' alt='$n' style='height: 150px; object-fit: cover'>
                         <div class='card-body'>
                             <h5 class='card-title'>$n</h5>
                             <p class='card-text'>R$: $p</p>
+                            <p id='descquery' hidden >$d</p>
+                            <p id='addquery' hidden >$a</p>
+                            <p id='tipoquery' hidden >$t</p>
                             <a class='btn btn-info' href='alterarproduto.php?id=$id'> Editar </a>
                             <a class='btn btn-danger' href='excluirproduto.php?id=$id'> Excluir </a>
                         </div>
@@ -54,6 +57,84 @@
         
         
         ?>
+        <div class="modal fade" id="query" tabindex="-1" aria-labelledby="queryLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title titulo" id="queryLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col">
+                  <img src="" id="queryfoto" style="height: 160px; vertical-align: middle;">
+                </div>
+                <div class="col">
+                  <p class="titulo" id="querypreco"></p>
+                  <p class="titulo" id="querytipo"></p>
+                  <h6 class="titulo">Ingredientes:</h6>
+                  <p id="querydesc"></p>
+                  <h6 class="titulo" id="querypers" hidden>Personalização:</h6>
+                  <p id="queryadd"></p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function modalquery(modal) {
+
+          var nome = modal.querySelector("#nomequery").textContent;
+          var foto = modal.querySelector("#fotoquery").src;
+          var preco = modal.querySelector("#precoquery").textContent;
+          var desc = modal.querySelector("#descquery").textContent;
+          var adendum = modal.querySelector("#addquery").textContent;
+          var tipo = modal.querySelector("#tipoquery").textContent;
+
+          document.querySelector("#queryLabel").innerText = nome;
+          document.querySelector("#queryfoto").src = foto;
+          document.querySelector("#querypreco").innerText = preco;
+          document.querySelector("#querydesc").innerText = desc;
+          document.querySelector("#queryadd").innerText = adendum;
+          
+          var pers = document.getElementById("#querypers")
+
+          if (adendum != "") {
+            document.getElementById("querypers").hidden = false;
+          }else{
+            document.getElementById("querypers").hidden = true;
+          }
+
+          switch (tipo) {
+
+            case "1":
+              document.querySelector("#querytipo").innerText = "Prato Feito";
+              break;
+
+            case "2":
+              document.querySelector("#querytipo").innerText = "Porção";
+              break;
+
+            case "3":
+              document.querySelector("#querytipo").innerText = "Bebida";
+              break;
+
+            case "4":
+              document.querySelector("#querytipo").innerText = "Sobremesa";
+              break;
+
+            default:
+              document.querySelector("#querytipo").innerText = "wtf?";
+              break;
+
+          }
+        }
+      </script>
 
 
             </div>

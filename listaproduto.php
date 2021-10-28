@@ -19,12 +19,21 @@
 
 
       <?php
-
-
+      if (isset($_GET["tipo"])) {
+       $tipo = $_GET["tipo"];
+      }
+      
 
       include "conn.php";
 
-      $sql = "select * from produto";
+      if (isset($tipo)) {
+        $sql = "select * from produto where tipo = $tipo";
+      } else {
+        $sql = "select * from produto";
+      }
+      
+
+      
 
       $resul = mysqli_query($conn, $sql);
 
@@ -111,9 +120,10 @@
           var pers = document.getElementById("#querypers")
 
           if (adendum != "") {
-            pers.hidden = false;
+            document.getElementById("querypers").hidden = false;
+          }else{
+            document.getElementById("querypers").hidden = true;
           }
-
           switch (tipo) {
 
             case "1":

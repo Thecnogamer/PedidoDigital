@@ -8,6 +8,7 @@
   <link href="CSS/Style.css" rel="stylesheet" type="text/css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="CSS/fontawesome.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
