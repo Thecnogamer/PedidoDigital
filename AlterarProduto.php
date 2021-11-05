@@ -10,15 +10,15 @@
     
         include "navbar.php";
 
-include_once "conexao.php";
+include_once "conn.php";
 
 $id = $_GET["id"];
 
-$pastadearquivos="backupImagens/";
+$pastadearquivos="imagens/produtos/";
 
-$sql1="select * from tb_produto where id_produto = $id";
+$sql1="select * from produto where id = $id";
 
-$resul1=mysqli_query($con,$sql1);
+$resul1=mysqli_query($conn,$sql1);
 
 $dados=mysqli_fetch_assoc($resul1);
 
@@ -60,13 +60,13 @@ $foto = $dados["foto"];
 
 
         <div class="container-fluid">
-        <h2>Inserir Produto</h2>
+        <h2>Alterar Produto</h2>
         <form name="insProduto" action="" method="POST" enctype="multipart/form-data">
             <div class="row g-4">
                 <div class="col-sm-7">
                     <div class="mb-3">
                         <center>
-                        <img id="output" height="300px" src="<?php $foto ?>"/>
+                        <img id="output" height="300px" src="<?php echo"$pastadearquivos$foto" ?>"/>
                         </center>
                         <br>
                         <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" required onchange="loadFile(event)">
@@ -87,13 +87,13 @@ $foto = $dados["foto"];
                 </div>
                 <div class="col-md-4 ">
                     <label for="nome">Nome do Produto</label><br>
-                    <input class="form-control" type="text" name="nome" required="required" value="<?php $nome ?>">
+                    <input class="form-control" type="text" name="nome" required="required" value="<?php echo"$nome" ?>">
                     <label for="preco">Preço do produto</label><br>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">R$</span>
                         </div>
-                        <input class="form-control" type="number" name="preco" required="required" step=".01" value="<?php $preco ?>">
+                        <input class="form-control" type="number" name="preco" required="required" step=".01" value="<?php echo"$preco" ?>">
                     </div>
                     <label for="tipo">Tipo do Produto</label><br>
                     <div class="form-check">
@@ -139,11 +139,11 @@ $foto = $dados["foto"];
             <div class="row">
                 <div class="col">
                     <label for="descricao">Ingredientes</label><br>
-                    <textarea class="form-control form-control-sm" name="descricao" required value="<?php $descricao ?>"></textarea>
+                    <textarea class="form-control form-control-sm" name="descricao" required><?php echo"$descricao" ?></textarea>
                 </div>
                 <div class="col">
                     <label for="adendum">Adendos</label><br>
-                    <textarea class="form-control form-control-sm" name="adendum" value="<?php $adendum ?>" placeholder="Queijo extra, Cebola caramelizada etc"></textarea>
+                    <textarea class="form-control form-control-sm" name="adendum"  placeholder="Queijo extra, Cebola caramelizada etc"><?php echo"$adendum" ?></textarea>
                 </div>
                 <div class="col">
                     

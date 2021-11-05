@@ -14,10 +14,10 @@
 <body>
 
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #fffde4;">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fffde4;">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
-        <img src="imagens/logomin.png" alt="logo" width="30" height="30" class="d-inline-block align-text-top">
+        <img src="imagens/logomin.png" alt="logo" width="25" height="25" class="d-inline-block align-text-top">
         Pedido Digital
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

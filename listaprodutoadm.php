@@ -1,40 +1,77 @@
 <!doctype html>
 <html>
-   <head>
-    <meta charset="UTF-8">
-    <title>Pedido Digital - Inserir Produto</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-   </head>
-   <body background-color="#fffff4">
 
-   <?php include "navbar.php"; ?>
+<head>
+  <meta charset="UTF-8">
+  <title>Pedido Digital - Inserir Produto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
 
-        <div class="container-fluid">
-            <br>
-            <br>
-            <div class="row row-cols-3">
-    
-    
- 
-        <?php 
-            
-            
+<body background-color="#fffff4">
 
-            include "conn.php";
+  <?php include "navbar.php"; ?>
 
-            $sql="select id,nome,preco,foto from produto";
+  <div class='modal fade' id='excluirmodal' tabindex='-1' aria-labelledby='excluirmodalLabel' aria-hidden='true'>
+    <div class='modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-body'>
+          <p id="excluirmodaltxt">Deseja excluir esse produto?</p>
+        </div>
+        <div class='modal-footer'>
+          <a  id = "confexcl"href="" class='btn btn-primary' >Sim</a>
+          <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Não</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='modal fade' id='sucessomodal' tabindex='-1' aria-labelledby='excluirmodalLabel' aria-hidden='true'>
+    <div class='modal-dialog'>
+      <div class='modal-content'>
+        <div class='modal-body'>
+          <p id="excluirmodaltxt">Produto excluido com sucesso</p>
+        </div>
+        <div class='modal-footer'>
+          <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            $resul=mysqli_query($conn,$sql);
 
-            while($dados=mysqli_fetch_assoc($resul)){
+  <div class="container-fluid">
+    <br>
+    <br>
+    <div class="row row-cols-3">
 
-                $id = $dados["id"];
-                $n = $dados["nome"];
-                $p = $dados["preco"];
-                $i = $dados["foto"];
-                $pastaArquivos = "imagens/produtos/";
 
-                echo "
+
+      <?php
+
+
+
+      include "conn.php";
+
+      if (isset($tipo)) {
+        $sql = "select * from produto where tipo = $tipo";
+      } else {
+        $sql = "select * from produto";
+      }
+
+
+      $resul = mysqli_query($conn, $sql);
+
+      while ($dados = mysqli_fetch_assoc($resul)) {
+
+        $id = $dados["id"];
+        $n = $dados["nome"];
+        $p = $dados["preco"];
+        $i = $dados["foto"];
+        $d = $dados["descricao"];
+        $a = $dados["adendum"];
+        $t = $dados["tipo"];
+        $pastaArquivos = "imagens/produtos/";
+
+        echo "
                 <div class='col'>
                     <div class='card' onclick='modalquery(this)' style='width: 18rem; cursor:pointer;' data-bs-toggle='modal' data-bs-target='#query'>
                         <img src='$pastaArquivos$i' class='card-img-top' alt='$n' style='height: 150px; object-fit: cover'>
@@ -45,19 +82,19 @@
                             <p id='addquery' hidden >$a</p>
                             <p id='tipoquery' hidden >$t</p>
                             <a class='btn btn-info' href='alterarproduto.php?id=$id'> Editar </a>
-                            <a class='btn btn-danger' href='excluirproduto.php?id=$id'> Excluir </a>
+                            <a class='btn btn-danger' data-value='$id' data-bs-toggle='modal' data-bs-target='#excluirmodal' onclick='queryid(this)'> Excluir </a>
                         </div>
                     </div>
                 </div>
                 <br>
                 ";
-            }
-        
-        
-        
-        
-        ?>
-        <div class="modal fade" id="query" tabindex="-1" aria-labelledby="queryLabel" aria-hidden="true">
+      }
+
+
+
+
+      ?>
+      <div class="modal fade" id="query" tabindex="-1" aria-labelledby="queryLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -101,12 +138,12 @@
           document.querySelector("#querypreco").innerText = preco;
           document.querySelector("#querydesc").innerText = desc;
           document.querySelector("#queryadd").innerText = adendum;
-          
+
           var pers = document.getElementById("#querypers")
 
           if (adendum != "") {
             document.getElementById("querypers").hidden = false;
-          }else{
+          } else {
             document.getElementById("querypers").hidden = true;
           }
 
@@ -136,8 +173,36 @@
         }
       </script>
 
+      <script>
+        function queryid(anchor) {
 
-            </div>
-        </div>
-   </body>
+          var id = anchor.getAttribute("data-value");
+
+          document.querySelector("#confexcl").href = "excluirproduto.php?id=" + id;
+        }
+      </script>
+
+      <?php
+
+
+      if (isset($_SESSION["Voltando"]) && $_SESSION["Voltando"] == "sucesso") {
+
+
+        echo "<script type='text/javascript'>
+          $(document).ready(function(){
+          $('#sucessomodal').modal('show');
+          });
+          </script>";
+
+        unset($_SESSION["Voltando"]);
+      }
+
+
+      ?>
+
+
+    </div>
+  </div>
+</body>
+
 </html>
