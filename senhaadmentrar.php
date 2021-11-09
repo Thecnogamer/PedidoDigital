@@ -72,11 +72,9 @@
                         $n=$dados["nome"];
                         $r=$dados["nome_restaurante"];
     
-                        session_start();
-    
                         $_SESSION["adm"]="ativar";
     
-                        header("Location: ".$_SERVER['HTTP_REFERER']);
+                        header("index.php");
 
     
                     }

@@ -14,7 +14,7 @@
 <body>
 
 
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #fffde4;">
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d7eeff;">
     <div class="container-fluid">
       <a class="navbar-brand" href="index.php">
         <img src="imagens/logomin.png" alt="logo" width="25" height="25" class="d-inline-block align-text-top">
@@ -34,10 +34,10 @@
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Pratos Feitos</a></li>
-              <li><a class="dropdown-item" href="#">Porções</a></li>
-              <li><a class="dropdown-item" href="#">Bebidas</a></li>
-              <li><a class="dropdown-item" href="#">Sobremesas</a></li>
+              <li><a class="dropdown-item" href="listaproduto.php?tipo=1">Pratos Feitos</a></li>
+              <li><a class="dropdown-item" href="listaproduto.php?tipo=2">Porções</a></li>
+              <li><a class="dropdown-item" href="listaproduto.php?tipo=3">Bebidas</a></li>
+              <li><a class="dropdown-item" href="listaproduto.php?tipo=4">Sobremesas</a></li>
             </ul>
           </li>
           <?php

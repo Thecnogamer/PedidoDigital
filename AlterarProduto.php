@@ -130,7 +130,7 @@ $foto = $dados["foto"];
                     </div>
                     <br>
                     <div class="btn-group" role="group" aria-label="Btn limpar inserir">
-                        <input class="btn btn-success" type="submit" name="inserir" value="Inserir" >
+                        <input class="btn btn-success" type="submit" name="inserir" value="Alterar" >
                         <input class="btn btn-danger" type="reset" name="limpar" value="Limpar">
                     </div>
                     

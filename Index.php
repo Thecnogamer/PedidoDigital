@@ -6,15 +6,25 @@
   <title>Pedido Digital - Início</title>
 </head>
 
-<body background-color="#fffff4">
+<body>
   <?php
 
-  include "navbar.php";
+  include_once "navbar.php";
 
   if ($_SESSION["adm"] != "ativar" && $_SESSION["adm"] != "desativar") {
     session_start();
     $_SESSION["adm"] = "desativar";
   }
+
+  include_once "conn.php";
+
+          $pastaarquivos = "imagens/produtos/";
+          
+          $sql = "select nome, descricao, preco, foto from produto where promo <> 0";
+          
+          $resul = mysqli_query($conn,$sql);
+
+          $i = 1;
 
   ?>
   <center>
@@ -40,7 +50,7 @@
     <br>
 
     <div class="container-md">
-      <div id="carouselExampleCaptions" class="carousel carousel-dark slide" data-bs-ride="carousel">
+      <div id="carouselExampleCaptions" class="carousel carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -49,16 +59,6 @@
         <div class="carousel-inner">
 
           <?php
-          
-          include_once "conn.php";
-
-          $pastaarquivos = "imagens/produtos/";
-          
-          $sql = "select nome, descricao, preco, foto from produto where promo <> 0";
-          
-          $resul = mysqli_query($conn,$sql);
-
-          $i = 1;
 
           while ($dados = mysqli_fetch_assoc($resul)) {
 
@@ -67,24 +67,26 @@
             $foto = $dados["foto"];
             $preco = $dados["preco"];
 
-            if ($i = 1) {
-              echo "<div class='carousel-item active'>
-                      <img src='$pastaarquivos$foto' class='d-block w-25' alt='$nome'>
-                      <div class='carousel-caption d-none d-md-block'>
-                        <h5>$nome</h5>
-                        <p>$preco</p>
-                        <p>$descricao</p>
+            if ($i == 1) {
+              ?> <div class="carousel-item active">
+                      <img src="<?php echo"$pastaarquivos$foto";?>" class="d-block" style="height: 20rem" alt="<?php echo"$nome";?>">
+                      <div class="carousel-caption d-none d-sm-block" style="background: rgba(64, 85, 100, 0.35);" >
+                        <h5><?php echo"$nome"; ?></h5>
+                        <p>R$:<?php echo"$preco"; ?></p>
+                        <p><?php echo"$descricao"; ?></p>
                       </div>
-                    </div>";
+                    </div>
+            <?php
             }else {
-              echo "<div class='carousel-item'>
-                      <img src='$pastaarquivos$foto' class='d-block w-25' alt='$nome'>
-                      <div class='carousel-caption d-none d-md-block'>
-                        <h5>$nome</h5>
-                        <p>$preco</p>
-                        <p>$descricao</p>
+              ?> <div class="carousel-item">
+                      <img src="<?php echo"$pastaarquivos$foto";?>" class="d-block" style="height: 20rem" alt="<?php echo"$nome";?>">
+                      <div class="carousel-caption d-none d-sm-block" style="background: rgba(64, 85, 100, 0.35);" >
+                        <h5><?php echo"$nome";?></h5>
+                        <p>R$:<?php echo"$preco";?></p>
+                        <p><?php echo"$descricao";?></p>
                       </div>
-                    </div>";
+                    </div>
+            <?php
             }
 
             
