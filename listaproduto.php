@@ -14,6 +14,7 @@
   <div class="container-fluid">
     <br>
     <br>
+    <center>
     <div class="row row-cols-3">
 
 
@@ -151,6 +152,7 @@
       </script>
 
     </div>
+      </center>
   </div>
 </body>
 
