@@ -1,3 +1,46 @@
+<?php 
+
+        
+        if (isset($_POST["logar"])) {
+            $usuario=$_POST['usuario'];
+            $senha=$_POST['senha'];
+    
+            include_once("conn.php");
+    
+            if ($conn==true) {
+                $sql="select * from restaurante where nome='$usuario' and senha='$senha'";
+    
+                $verifica = mysqli_query($conn,$sql);
+    
+                if (mysqli_num_rows($verifica)<=0) {
+                    echo "<script type='text/javascript'>
+                        $(document).ready(function(){
+                        $('#falhamodal').modal('show');
+                        });
+                        </script>";
+                } 
+                else {
+                    if($dados=mysqli_fetch_assoc($verifica)){
+    
+                        $n=$dados["nome"];
+                        $r=$dados["id"];
+
+                        session_start();
+    
+                        $_SESSION["adm"]="ativar";
+                        $_SESSION["rest"] ="$r";
+
+                        header("Location: index.php");
+    
+                    }
+                }
+                
+    
+            }
+        }
+        
+    ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,47 +87,6 @@
             </form>
 
         </div>
-
-    <?php 
-
-        
-        if (isset($_POST["logar"])) {
-            $usuario=$_POST['usuario'];
-            $senha=$_POST['senha'];
-    
-            include_once("conn.php");
-    
-            if ($conn==true) {
-                $sql="select * from restaurante where nome='$usuario' and senha='$senha'";
-    
-                $verifica = mysqli_query($conn,$sql);
-    
-                if (mysqli_num_rows($verifica)<=0) {
-                    echo "<script type='text/javascript'>
-                        $(document).ready(function(){
-                        $('#falhamodal').modal('show');
-                        });
-                        </script>";
-                } 
-                else {
-                    if($dados=mysqli_fetch_assoc($verifica)){
-    
-                        $n=$dados["nome"];
-                        $r=$dados["nome_restaurante"];
-    
-                        $_SESSION["adm"]="ativar";
-    
-                        header("index.php");
-
-    
-                    }
-                }
-                
-    
-            }
-        }
-        
-    ?>
     </body>
 </html>
 

@@ -69,7 +69,7 @@ $foto = $dados["foto"];
                         <img id="output" height="300px" src="<?php echo"$pastadearquivos$foto" ?>"/>
                         </center>
                         <br>
-                        <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" required onchange="loadFile(event)">
+                        <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" onchange="loadFile(event)">
                         <script>
                           var loadFile = function(event) {
                             var output = document.getElementById('output');

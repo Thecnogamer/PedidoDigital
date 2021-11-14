@@ -1,69 +1,70 @@
 <!DOCTYPE html>
 <html>
-   <head>
+
+<head>
     <meta charset="UTF-8">
     <title>Pedido Digital - Inserir Produto</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    </head>
-    <body>
-        <?php
-    
-        include "navbar.php";
-    
-        ?>
-        <div class='modal fade' id='ModalYes' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-            <div class='modal-dialog'>
-                <div class='modal-content'>
-                    <div class='modal-body'>
-                        Produto inserido com sucesso
-                    </div>
-                    <div class='modal-footer'>
-                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Inserir outro</button>
-                        <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
-                    </div>
+</head>
+
+<body>
+    <?php
+    include "navbar.php";
+
+    ?>
+    <div class='modal fade' id='ModalYes' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-body'>
+                    Produto inserido com sucesso
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Inserir outro</button>
+                    <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class='modal fade' id='Modaleita' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-            <div class='modal-dialog'>
-                <div class='modal-content'>
-                    <div class='modal-body'>
-                        Algo deu errado
-                    </div>
-                    <div class='modal-footer'>
-                        <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tentar novamente</button>
-                        <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
-                    </div>
+    <div class='modal fade' id='Modaleita' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+        <div class='modal-dialog'>
+            <div class='modal-content'>
+                <div class='modal-body'>
+                    Algo deu errado
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tentar novamente</button>
+                    <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <div class="container-fluid">
+    <div class="container-fluid">
         <h2>Inserir Produto</h2>
-        <form name="insProduto" action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data">
             <div class="row g-4">
                 <div class="col-sm-7">
                     <div class="mb-3">
                         <center>
-                        <img id="output" height="300px"/>
-                        <label id="labelfile" for="formFile" class="form-label" >Insira uma foto do produto<br> Preferívelmente 16:9</label>
+                            <img id="output" height="300px" />
+                            <label id="labelfile" for="formimagem" class="form-label">Insira uma foto do produto<br> Preferívelmente 16:9</label>
                         </center>
                         <br>
-                        <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" required onchange="loadFile(event)">
+                        <input class="form-control" type="file" id="formimagem" name="imagem" accept="image/*" onchange="loadFile(event)">
                         <script>
-                          var loadFile = function(event) {
-                            var output = document.getElementById('output');
-                            var label = document.getElementById('labelfile');
-                            output.src = URL.createObjectURL(event.target.files[0]);
-                            output.onload = function() {
-                              URL.revokeObjectURL(output.src)
-                              label.hidden = true;
-                            }
-                            
+                            var loadFile = function(event) {
+                                var output = document.getElementById('output');
+                                var label = document.getElementById('labelfile');
+                                output.src = URL.createObjectURL(event.target.files[0]);
+                                output.onload = function() {
+                                    URL.revokeObjectURL(output.src)
+                                    label.hidden = true;
+                                }
 
-                          };
+
+                            };
                         </script>
                     </div>
                 </div>
@@ -86,10 +87,10 @@
                     </div>
                     <br>
                     <div class="btn-group" role="group" aria-label="Btn limpar inserir">
-                        <input class="btn btn-success" type="submit" name="inserir" value="Inserir" >
+                        <input class="btn btn-success" type="submit" name="inserir" value="Inserir">
                         <input class="btn btn-danger" type="reset" name="limpar" value="Limpar">
                     </div>
-                    
+
                 </div>
             </div>
             <div class="row">
@@ -102,49 +103,47 @@
                     <textarea class="form-control form-control-sm" name="adendum" placeholder="Queijo extra, Cebola caramelizada etc"></textarea>
                 </div>
                 <div class="col">
-                    
+
                 </div>
             </div>
         </form>
-        </div>
+    </div>
 
-        <?php
-        if(isset($_POST["inserir"])){
-            $n=$_POST["nome"];
-            $p=$_POST["preco"];
-            $t=$_POST["tipo"];
-            $d=$_POST["descricao"];
-            $a=$_POST["adendum"];
-            $f=$_FILES["foto"]["name"];
+    <?php
+    if (isset($_POST["inserir"])) {
+        $f = $_FILES["imagem"]["name"];
+        $r = $_SESSION["rest"];
+        $n = $_POST["nome"];
+        $p = $_POST["preco"];
+        $t = $_POST["tipo"];
+        $d = $_POST["descricao"];
+        $a = $_POST["adendum"];
 
-            if ($f != "") {
-                $pastaarquivos = "imagens/produtos/";
-                $nomearquivo= $f;
-                $nometemp = $_FILES["foto"]["tmp_name"];
-                move_uploaded_file($nometemp, $pastaarquivos.$nomearquivo);
-            }
+        $pastaarquivos = "imagens/produtos/";
+        $nometemp = $_FILES["imagem"]["tmp_name"];
+        move_uploaded_file($nometemp, $pastaarquivos . $f);
 
-            include "conn.php";
+        include "conn.php";
 
-            $sql="insert into produto (nome, preco, tipo, descricao, adendum, foto) values('$n',$p,$t,'$d','$a','$f')";
+        $sql = "insert into produto (nome, preco, tipo, descricao, adendum, foto, id_restaurante) values('$n',$p,$t,'$d','$a','$f',$r)";
 
-            $result=mysqli_query($conn, $sql);
+        $result = mysqli_query($conn, $sql);
 
-            if($result == true){
-                echo "<script type='text/javascript'>
+        if ($result == true) {
+            echo "<script type='text/javascript'>
               $(document).ready(function(){
               $('#ModalYes').modal('show');
               });
               </script>";
-            }
-            else{
-                echo "<script type='text/javascript'>
+        } else {
+            echo "<script type='text/javascript'>
               $(document).ready(function(){
               $('#Modaleita').modal('show');
               });
               </script>";
-            }
         }
-        ?>
-    </body>
+    }
+    ?>
+</body>
+
 </html>

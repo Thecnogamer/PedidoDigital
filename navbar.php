@@ -40,33 +40,115 @@
               <li><a class="dropdown-item" href="listaproduto.php?tipo=4">Sobremesas</a></li>
             </ul>
           </li>
+
           <?php
           session_start();
+          if (isset($_SESSION["adm"])) {
+
+          }else {
+            $_SESSION["adm"] = "desativar";
+          }
+
           if ($_SESSION["adm"] == "ativar") {
             echo "<li class='nav-item dropdown'>
-              <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'>
-              Modo ADM
-              </a>
-              <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
-                <a class='dropdown-item' href='listaprodutoadm.php'>Lista ADM</a>
-                <a class='dropdown-item' href='frminserirproduto.php'>Inserir Produto</a>
-              </div>
-            </li>";
+                      <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' data-bs-toggle='dropdown' aria-expanded='false'>
+                        Modo ADM
+                      </a>
+                      <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+                        <a class='dropdown-item' href='listaprodutoadm.php'>Lista ADM</a>
+                        <a class='dropdown-item' href='frminserirproduto.php'>Inserir Produto</a>
+                      </div>
+                    </li>";
           }
           ?>
         </ul>
-        <?php
-        if ($_SESSION["adm"] == "ativar") {
-          echo "<a class='btn btn-danger' href='senhaadmsair.php' role='button'>Sair do modo Adm</a>";
-        } else {
-          echo "<a class='btn btn-success' href='senhaadmentrar.php' role='button'>Entrar no modo Adm</a>";
-        }
-        ?>
+
+        <form id="selectRest" action="" method="POST">
+          <?php
+
+          if ($_SESSION["adm"] == "ativar") {
+            
+          }else {
+
+            if (isset($_SESSION["rest"])) {
+
+              ?>
+
+              <div class="row-6">
+                <select class="form-select" aria-label="Selecionar Restaurante" name="selectrestaurante" onchange="setarRestaurante(this.selectedIndex)">
+                  <option onchange="setarRestaurante(this)" value='0'>--Escolha um restaurante--</option>
+                  <?php
+
+                  include_once "conn.php";
+
+                  $nav_resul = mysqli_query($conn, "select * from restaurante");
+
+                  while ($nav_dados = mysqli_fetch_assoc($nav_resul)) {
+
+                    $nav_id = $nav_dados["id"];
+                    $nav_nome_restaurante = $nav_dados["nome_restaurante"];
+
+                    if ($nav_id == $_SESSION["rest"]) {
+                      echo "<option selected onchange='setarRestaurante(this)' value='$nav_id'>$nav_nome_restaurante</option>";
+                    } else {
+                      echo "<option onchange='setarRestaurante(this)' value='$nav_id'>$nav_nome_restaurante</option>";
+                    }
+                  }
+                  ?>
+                </select>
+              </div>
+
+              <?php
+            } 
+            else {
+                ?>
+              <div class="row-6">
+                <select class="form-select" aria-label="Selecionar Restaurante" name="selectrestaurante" onchange="setarRestaurante(this.selectedIndex)">
+                  <option selected onchange="setarRestaurante(this)">--Escolha um restaurante--</option>
+
+                  <?php
+
+                    include_once "conn.php";
+
+                    $nav_resul = mysqli_query($conn, "select * from restaurante");
+
+                    while ($nav_dados = mysqli_fetch_assoc($nav_resul)) {
+
+                      $nav_id = $nav_dados["id"];
+                      $nav_nome_restaurante = $nav_dados["nome_restaurante"];
+
+                      echo "<option onchange='setarRestaurante(this)'value='$nav_id'>$nav_nome_restaurante</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+              <?php
+            }            
+          }
+          ?>
+        </form>
+          <?php 
+          if($_SESSION["adm"] == "ativar"){
+            echo "<a class='btn btn-danger' href='senhaadmsair.php' role='button'>Sair do modo Adm</a>";
+          }else{
+            echo "<a class='btn btn-success' href='senhaadmentrar.php' role='button'>Entrar no modo Adm</a>";
+          }
+          ?>
       </div>
     </div>
   </nav>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+
+
+  <script>
+    function setarRestaurante(option) {
+      let restaurante = option;
+      let form = document.getElementById("selectRest");
+      form.action = "validar.php?id=" + restaurante;
+      form.submit();
+    }
+  </script>
 </body>
 
 </html>

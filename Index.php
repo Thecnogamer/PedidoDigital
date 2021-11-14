@@ -8,8 +8,12 @@
 
 <body>
   <?php
+ 
 
   include_once "navbar.php";
+  if(isset($_SESSION["rest"]) && $_SESSION["rest"] != "0"){
+
+  
 
   if ($_SESSION["adm"] != "ativar" && $_SESSION["adm"] != "desativar") {
     session_start();
@@ -18,9 +22,11 @@
 
   include_once "conn.php";
 
+          $r = $_SESSION["rest"];
+
           $pastaarquivos = "imagens/produtos/";
           
-          $sql = "select nome, descricao, preco, foto from produto where promo <> 0";
+          $sql = "select nome, descricao, preco, foto from produto where promo <> 0 and id_restaurante = $r";
           
           $resul = mysqli_query($conn,$sql);
 
@@ -33,16 +39,16 @@
   <div class="container-md">
       <div class="row">
         <div class="col">
-          <a href="listaproduto.php?tipo=1"><img src="imagens/dinner_dining_black_24dp.svg" height="48dp"></a>
+          <a href="listaproduto.php?tipo=1"><img src="imagens/spaguetti.png" height="48dp"></a>
         </div>
         <div class="col">
-          <a href="listaproduto.php?tipo=2"><img src="imagens/lunch_dining_black_24dp.svg" height="48dp"></a>
+          <a href="listaproduto.php?tipo=2"><img src="imagens/burger.png" height="48dp"></a>
         </div>
         <div class="col">
-          <a href="listaproduto.php?tipo=3"><img src="imagens/local_bar_black_24dp.svg" height="48dp"></a>
+          <a href="listaproduto.php?tipo=3"><img src="imagens/cocktail.png" height="48dp"></a>
         </div>
         <div class="col">
-          <a href="listaproduto.php?tipo=4"><img src="imagens/icecream_black_24dp.svg" height="48dp"></a>
+          <a href="listaproduto.php?tipo=4"><img src="imagens/birthday-cake.png" height="48dp"></a>
         </div>
       </div>
     </div>
@@ -111,6 +117,10 @@
 
     
   </center>
+  <?php } else{
+    echo"<center> <font size=26> Por favor escolha um restaurante na barra acima</font> </center>";
+  } ?>
+
 
 </body>
 

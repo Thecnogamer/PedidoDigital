@@ -3,6 +3,7 @@
     session_start();
 
     $_SESSION["adm"]="desativar";
-    header("Location:" . $_SERVER['HTTP_REFERER']);
+    $_SESSION["rest"]="0";
+    header("Location: index.php");
 ?>
 

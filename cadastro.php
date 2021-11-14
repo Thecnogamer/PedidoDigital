@@ -15,8 +15,9 @@
                 <div class="col-auto">
             <h2> Cadastro restaurante</h2>
                 <label class="form-label" for="nome">Nome de usuário</label>
-                <input class="form-control" type="text" name="nome" required="required">
-                <br>
+                <input class="form-control" type="text" id="inputuser" name="nome" required="required">
+                <p id="usuarioExistente" style="color:#ff2727;" hidden> Usuário ja cadastrado</p>
+                <br id="bruser">
 
                 <label class="form-label" for="senha">Senha</label>
                 <input class="form-control" type="password" name="senha" required="required">
@@ -32,6 +33,7 @@
             </form>
         </div>
         <br>
+
         <?php
             if (isset($_POST["cadastrar"])) {
         
@@ -39,11 +41,44 @@
             $s = $_POST["senha"];
             $r = $_POST["restaurante"];
 
-            include_once("conexao.php");
+            include_once "conn.php";
 
-            $sql = "insert into tb_nome (nome,senha,restaurante)
+            $sqlUser = "select nome from restaurante where nome = '$n'";
+
+            $queryresult = mysqli_query($conn,$sqlUser);
+
+            if (mysqli_fetch_assoc($queryresult)) {
+
+                echo "<script type='text/javascript'>
+
+                    var par = document.getElementById('usuarioExistente');
+                    var bt = document.getElementById('bruser');
+                    
+                    $(document).ready(function(){
+                        par.hidden = false;
+                        bt.hidden = true;
+                    });
+                
+                        
+                </script>";
+            }else{
+
+                echo "<script type='text/javascript'>
+
+                    var par = document.getElementById('usuarioExistente');
+                    var bt = document.getElementById('bruser');
+                    
+                    $(document).ready(function(){
+                        par.hidden = true;
+                        bt.hidden = false;
+                    });
+                
+                        
+                </script>";
+
+            $sql = "insert into restaurante (nome,senha,nome_restaurante)
             values ('$n','$s','$r')";
-
+                
             $result = mysqli_query($conn, $sql);
 
             if($result == true){
@@ -60,8 +95,9 @@
               });
               </script>";
             }
-            
         }
+        }
+        
             
             
             
@@ -69,20 +105,20 @@
         
         
         ?>
-        <div class='modal fade' id='ModalYes' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+        <div class='modal fade' id='ModalYes' tabindex='-1' aria-labelledby='ModalYes' aria-hidden='true'>
             <div class='modal-dialog'>
                 <div class='modal-content'>
                     <div class='modal-body'>
                         Cadastro realizado com sucesso
                     </div>
                     <div class='modal-footer'>
-                        <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="senhaadmentrar.php">Logar</button>
+                        <a class='btn btn-primary' href="senhaadmentrar.php">Logar</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class='modal fade' id='Modaleita' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+        <div class='modal fade' id='Modaleita' tabindex='-1' aria-labelledby='Modaleita' aria-hidden='true'>
             <div class='modal-dialog'>
                 <div class='modal-content'>
                     <div class='modal-body'>
@@ -94,5 +130,6 @@
                 </div>
             </div>
         </div>
+
     </body>
 </html>

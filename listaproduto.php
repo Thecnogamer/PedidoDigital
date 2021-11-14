@@ -15,11 +15,14 @@
     <br>
     <br>
     <center>
-    <div class="row row-cols-3">
+    <div class="row">
 
 
 
       <?php
+      $r=$_SESSION["rest"];
+
+
       if (isset($_GET["tipo"])) {
        $tipo = $_GET["tipo"];
       }
@@ -28,9 +31,9 @@
       include "conn.php";
 
       if (isset($tipo)) {
-        $sql = "select * from produto where tipo = $tipo";
+        $sql = "select * from produto where tipo = $tipo and id_restaurante = $r";
       } else {
-        $sql = "select * from produto";
+        $sql = "select * from produto where id_restaurante = $r";
       }
       
 
@@ -50,7 +53,7 @@
         $t = $dados["tipo"];
         $pastaArquivos = "imagens/produtos/";
 
-        echo "
+        echo("
                 <div class='col-6 col-sm-4'>
                     <div class='card' onclick='modalquery(this)' style='width: 18rem; cursor:pointer;' data-bs-toggle='modal' data-bs-target='#query'>
                         <img id='fotoquery' src='$pastaArquivos$i' class='card-img-top' alt='$n' style='height: 150px; object-fit: cover'>
@@ -64,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                ";
+                ");
       }
 
 

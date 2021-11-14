@@ -42,7 +42,7 @@
     <br>
     <br>
     <center>
-      <div class="row row-cols-3">
+      <div class="row">
 
 
 
@@ -52,12 +52,9 @@
 
         include "conn.php";
 
-        if (isset($tipo)) {
-          $sql = "select * from produto where tipo = $tipo";
-        } else {
-          $sql = "select * from produto";
-        }
+        $r = $_SESSION["rest"];
 
+        $sql = "select * from produto where id_restaurante = $r";
 
         $resul = mysqli_query($conn, $sql);
 
@@ -66,19 +63,20 @@
           $id = $dados["id"];
           $n = $dados["nome"];
           $p = $dados["preco"];
-          $i = $dados["foto"];
+          $t = $dados["tipo"];
           $d = $dados["descricao"];
           $a = $dados["adendum"];
-          $t = $dados["tipo"];
+          $i = $dados["foto"];
+          
           $pastaArquivos = "imagens/produtos/";
-
-          echo "
+          
+          echo( "
                 <div class='col-6 col-sm-4'>
                     <div class='card' onclick='modalquery(this)' style='width: 18rem; cursor:pointer;' data-bs-toggle='modal' data-bs-target='#query'>
-                        <img src='$pastaArquivos$i' class='card-img-top' alt='$n' style='height: 150px; object-fit: cover'>
+                        <img id='fotoquery' src='$pastaArquivos$i' class='card-img-top' alt='$n' style='height: 150px; object-fit: cover'>
                         <div class='card-body'>
-                            <h5 class='card-title'>$n</h5>
-                            <p class='card-text'>R$: $p</p>
+                            <h5 class='card-title'id='nomequery' >$n</h5>
+                            <p class='card-text' id='precoquery'>R$: $p</p>
                             <p id='descquery' hidden >$d</p>
                             <p id='addquery' hidden >$a</p>
                             <p id='tipoquery' hidden >$t</p>
@@ -88,7 +86,7 @@
                     </div>
                 </div>
                 <br>
-                ";
+                ");
         }
 
 
@@ -139,6 +137,8 @@
             document.querySelector("#querypreco").innerText = preco;
             document.querySelector("#querydesc").innerText = desc;
             document.querySelector("#queryadd").innerText = adendum;
+
+            console.log(nome);
 
             var pers = document.getElementById("#querypers")
 
