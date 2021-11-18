@@ -28,6 +28,7 @@ $tipo = $dados["tipo"];
 $descricao = $dados["descricao"];
 $adendum = $dados["adendum"];
 $foto = $dados["foto"];
+$promo = $dados["Promo"];
     
         ?>
         <div class='modal fade' id='ModalYes' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
@@ -38,7 +39,7 @@ $foto = $dados["foto"];
                     </div>
                     <div class='modal-footer'>
                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Inserir outro</button>
-                        <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
+                        <a type='button' class='btn btn-primary' href="listaprodutoadm.php">Voltar para a lista</a>
                     </div>
                 </div>
             </div>
@@ -52,7 +53,7 @@ $foto = $dados["foto"];
                     </div>
                     <div class='modal-footer'>
                         <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tentar novamente</button>
-                        <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
+                        <a type='button' class='btn btn-primary' href="listaprodutoadm.php">Voltar para a lista</a>
                     </div>
                 </div>
             </div>
@@ -129,6 +130,11 @@ $foto = $dados["foto"];
                     ?>
                     </div>
                     <br>
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="promo" value=1 <?php if($promo == 1){echo"checked";} ?>>
+                    <label for="promo">Produto em promoção</label>
+                    </div>
+                    <br>
                     <div class="btn-group" role="group" aria-label="Btn limpar inserir">
                         <input class="btn btn-success" type="submit" name="inserir" value="Alterar" >
                         <input class="btn btn-danger" type="reset" name="limpar" value="Limpar">
@@ -161,6 +167,14 @@ $foto = $dados["foto"];
             $a=$_POST["adendum"];
             $f=$_FILES["foto"]["name"];
 
+            if(isset($_POST["promo"])){
+            $prom = $_POST["promo"];
+            }else{
+            $prom = 0;    
+            }
+
+            echo"$prom";
+
             include "conn.php";
 
             if ($f != "") {
@@ -168,9 +182,9 @@ $foto = $dados["foto"];
                 $nomearquivo= $f;
                 $nometemp = $_FILES["foto"]["tmp_name"];
                 move_uploaded_file($nometemp, $pastaarquivos.$nomearquivo);
-                $sql ="UPDATE produto SET nome='$n',preco='$p',tipo='$t',descricao='$d',adendum='$a',foto='$f' WHERE id='$id'";
+                $sql ="UPDATE produto SET nome='$n',preco='$p',tipo='$t',descricao='$d',adendum='$a',foto='$f', Promo='$prom' WHERE id='$id'";
             }elseif ($f == "") {
-                $sql ="UPDATE produto SET nome='$n',preco='$p',tipo='$t',descricao='$d',adendum='$a' WHERE id='$id'";
+                $sql ="UPDATE produto SET nome='$n',preco='$p',tipo='$t',descricao='$d',adendum='$a', Promo=$prom WHERE id='$id'";
             }
 
             $result=mysqli_query($conn, $sql);

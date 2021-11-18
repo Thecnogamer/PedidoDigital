@@ -15,7 +15,7 @@
     <br>
     <br>
     <center>
-    <div class="row">
+    <div class="row row-cols-6 row-cols-sm-4">
 
 
 
@@ -54,7 +54,7 @@
         $pastaArquivos = "imagens/produtos/";
 
         echo("
-                <div class='col-6 col-sm-4'>
+                <div class='col'>
                     <div class='card' onclick='modalquery(this)' style='width: 18rem; cursor:pointer;' data-bs-toggle='modal' data-bs-target='#query'>
                         <img id='fotoquery' src='$pastaArquivos$i' class='card-img-top' alt='$n' style='height: 150px; object-fit: cover'>
                         <div class='card-body'>

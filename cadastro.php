@@ -23,6 +23,11 @@
                 <input class="form-control" type="password" name="senha" required="required">
                 <br>
 
+                <label class="form-label" for="senha">Confirmar senha</label>
+                <input class="form-control" type="password" name="senha_conf" required="required">
+                <p id="senha_nomatch" style="color:#ff2727;" hidden> senhas não correspondem</p>
+                <br id="brsenha">
+
                 <label class="form-label" for="restaurante">Restaurante</label>
                 <input class="form-control" type="text" name="restaurante" required="required">
                 <br>
@@ -39,6 +44,7 @@
         
             $n = $_POST["nome"];
             $s = $_POST["senha"];
+            $sc = $_POST["senha_conf"];
             $r = $_POST["restaurante"];
 
             include_once "conn.php";
@@ -61,16 +67,29 @@
                 
                         
                 </script>";
-            }else{
+            }else if($s==$sc){
 
                 echo "<script type='text/javascript'>
 
-                    var par = document.getElementById('usuarioExistente');
-                    var bt = document.getElementById('bruser');
+                    var par1 = document.getElementById('senha_nomatch');
+                    var bt1 = document.getElementById('brsenha');
                     
                     $(document).ready(function(){
-                        par.hidden = true;
-                        bt.hidden = false;
+                        par1.hidden = true;
+                        bt1.hidden = false;
+                    });
+                
+                        
+                </script>";
+
+                echo "<script type='text/javascript'>
+
+                    var par2 = document.getElementById('usuarioExistente');
+                    var bt2 = document.getElementById('bruser');
+                    
+                    $(document).ready(function(){
+                        par2.hidden = true;
+                        bt2.hidden = false;
                     });
                 
                         
@@ -95,6 +114,20 @@
               });
               </script>";
             }
+        }
+        else{
+            echo "<script type='text/javascript'>
+
+                    var par = document.getElementById('senha_nomatch');
+                    var bt = document.getElementById('brsenha');
+                    
+                    $(document).ready(function(){
+                        par.hidden = false;
+                        bt.hidden = true;
+                    });
+                
+                        
+                </script>";
         }
         }
         

@@ -20,7 +20,7 @@
                 </div>
                 <div class='modal-footer'>
                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Inserir outro</button>
-                    <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
+                    <a type='button' class='btn btn-primary' href="Index.php">Voltar para Início</a>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class='modal-footer'>
                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tentar novamente</button>
-                    <button type='button' class='btn btn-primary' data-bs-dismiss='modal' href="Index.php">Voltar para Início</button>
+                    <a type='button' class='btn btn-primary' href="Index.php">Voltar para Início</a>
                 </div>
             </div>
         </div>
