@@ -232,7 +232,7 @@
       ?><div class="alert alert-success" role="alert">
       Conta alterada com sucesso! Recarregando...
     </div>
-    <script> setTimeout(function(){ document.location.assign('index.php'); }); </script>
+    <script> setTimeout(function(){ document.location.assign('index.php'),3000 }); </script>
     <?php
     }else {
       ?><div class="alert alert-danger" role="alert">

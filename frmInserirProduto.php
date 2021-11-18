@@ -34,7 +34,7 @@
                 </div>
                 <div class='modal-footer'>
                     <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Tentar novamente</button>
-                    <a type='button' class='btn btn-primary' href="Index.php">Voltar para Início</a>
+                    <a type='button' class='btn btn-primary' href="listaprodutoadm.php">Voltar para Início</a>
                 </div>
             </div>
         </div>

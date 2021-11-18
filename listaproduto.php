@@ -15,7 +15,7 @@
     <br>
     <br>
     <center>
-    <div class="row row-cols-6 row-cols-sm-4">
+    <div class="row row-cols-6 row-cols-sm-4 g-3">
 
 
 
